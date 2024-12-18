@@ -7,8 +7,8 @@
 
 ### 📈 Stats d'activité
 
-- **Commits cette semaine** : `🟢 0`
-- **Commits ce mois-ci** : `🟢 0`
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
 
 ---
 
@@ -21,11 +21,6 @@
 | 🟢 **Command-creator-by-an-executable** | [Accéder au repo](https://github.com/polodu13160/Command-creator-by-an-executable) |
 
 
----
-
-### 👀 Nombre de visiteurs
-
-![Profile views](https://komarev.com/ghpvc/?username=polodu13160)
 
 ---
 
