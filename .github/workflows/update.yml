@@ -1,10 +1,8 @@
 name: Update README
 
 on:
-  schedule:
-    - cron: '0 * * * *' # Mise à jour toutes les heures
-  workflow_dispatch: # Permet de lancer manuellement l'action
-
+  workflow_dispatch: 
+  
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -31,23 +29,16 @@ jobs:
         const readmeTemplate = fs.readFileSync('README.md', 'utf-8');
 
         async function fetchGitHubData() {
-          // Commits cette semaine
           const commitsWeek = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()}`, {
             headers: { Accept: 'application/vnd.github.v3+json' },
           });
-
-          // Commits ce mois-ci
           const commitsMonth = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()}`, {
             headers: { Accept: 'application/vnd.github.v3+json' },
           });
-
-          // Projets récents
           const repos = await axios.get(`https://api.github.com/users/${username}/repos?sort=created&per_page=3`);
           const recentProjects = repos.data
             .map(repo => `| 🟢 **${repo.name}** | [Accéder au repo](${repo.html_url}) |\n`)
             .join('');
-
-          // Mettre à jour le README
           const updatedReadme = readmeTemplate
             .replace('{{ commits_week }}', commitsWeek.data.total_count)
             .replace('{{ commits_month }}', commitsMonth.data.total_count)
@@ -63,11 +54,10 @@ jobs:
           process.exit(1);
         });
         EOF
-
     - name: Commit and Push Changes
       run: |
         git config user.name "GitHub Actions"
-        git config user.email "noreply@github.com" # Utilise une adresse email générique
+        git config user.email "noreply@github.com" 
         git add README.md
         git commit -m "Update README dynamically"
         git push
