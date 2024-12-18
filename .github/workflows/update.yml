@@ -1,0 +1,73 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Mise à jour toutes les heures
+  workflow_dispatch: # Permet de lancer manuellement l'action
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install -g axios
+
+    - name: Fetch GitHub Data and Update README
+      run: |
+        node <<EOF
+        const fs = require('fs');
+        const axios = require('axios');
+
+        const username = 'polodu13160';
+        const readmeTemplate = fs.readFileSync('README.md', 'utf-8');
+
+        async function fetchGitHubData() {
+          // Commits cette semaine
+          const commitsWeek = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()}`, {
+            headers: { Accept: 'application/vnd.github.v3+json' },
+          });
+
+          // Commits ce mois-ci
+          const commitsMonth = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()}`, {
+            headers: { Accept: 'application/vnd.github.v3+json' },
+          });
+
+          // Projets récents
+          const repos = await axios.get(`https://api.github.com/users/${username}/repos?sort=created&per_page=3`);
+          const recentProjects = repos.data
+            .map(repo => `| 🟢 **${repo.name}** | [Accéder au repo](${repo.html_url}) |\n`)
+            .join('');
+
+          // Mettre à jour le README
+          const updatedReadme = readmeTemplate
+            .replace('{{ commits_week }}', commitsWeek.data.total_count)
+            .replace('{{ commits_month }}', commitsMonth.data.total_count)
+            .replace('{{ recent_projects }}', recentProjects)
+            .replace('{{ github_username }}', username)
+            .replace('{{ last_update }}', new Date().toLocaleString());
+
+          fs.writeFileSync('README.md', updatedReadme);
+        }
+
+        fetchGitHubData().catch(err => {
+          console.error(err);
+          process.exit(1);
+        });
+        EOF
+
+    - name: Commit and Push Changes
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "noreply@github.com" # Utilise une adresse email générique
+        git add README.md
+        git commit -m "Update README dynamically"
+        git push
