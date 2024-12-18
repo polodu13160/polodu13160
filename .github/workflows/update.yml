@@ -29,10 +29,13 @@ jobs:
         const readmeTemplate = fs.readFileSync('README.md', 'utf-8');
 
         async function fetchGitHubData() {
-          const commitsWeek = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()}`, {
+          const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+          const firstOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+
+          const commitsWeek = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${oneWeekAgo}`, {
             headers: { Accept: 'application/vnd.github.v3+json' },
           });
-          const commitsMonth = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()}`, {
+          const commitsMonth = await axios.get(`https://api.github.com/search/commits?q=author:${username}+committer-date:>${firstOfMonth}`, {
             headers: { Accept: 'application/vnd.github.v3+json' },
           });
           const repos = await axios.get(`https://api.github.com/users/${username}/repos?sort=created&per_page=3`);
