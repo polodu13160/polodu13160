@@ -25,7 +25,7 @@
 
 ### 👀 Nombre de visiteurs
 
-![Visiteurs](https://visitor-badge.glitch.me/badge?page_id=polodu13160.polodu13160&left_color=black&right_color=green)
+![Visiteurs](https://img.shields.io/badge/dynamic/json?color=green&label=visitors&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fpolodu13160.polodu13160%2Fvisitors)
 
 ---
 
