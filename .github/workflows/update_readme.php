@@ -8,23 +8,6 @@ $readmeTemplate = file_get_contents('README.md');
 
 function fetchGitHubData($username) {
     $client = new Client();
-   // $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
-    //$firstOfMonth = date('Y-m-d', strtotime('first day of this month'));
-
-    // Echo the dates for debugging purposes
-   // echo "Date one week ago: $oneWeekAgo\n";
-   // echo "Date first of month: $firstOfMonth\n";
-
-    //$commitsWeekResponse = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:>$oneWeekAgo", [
-      //  'headers' => ['Accept' => 'application/vnd.github.v3+json'],
-    //]);
-    //$commitsWeek = json_decode($commitsWeekResponse->getBody(), true);
-
-    //$commitsMonthResponse = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:>$firstOfMonth", [
-      //  'headers' => ['Accept' => 'application/vnd.github.v3+json'],
-    //]);
-    //$commitsMonth = json_decode($commitsMonthResponse->getBody(), true);
-
     $reposResponse = $client->get("https://api.github.com/users/$username/repos?sort=created&per_page=3");
     $repos = json_decode($reposResponse->getBody(), true);
 
@@ -34,18 +17,25 @@ function fetchGitHubData($username) {
     }
 
     global $readmeTemplate;
-    $updatedReadme = str_replace([
-        '{{ recent_projects }}',
-        '{{ github_username }}',
-        '{{ last_update }}'
-    ], [
-        $recentProjects,
-        $username,
-        date('Y-m-d H:i:s')
-    ], $readmeTemplate);
+    $updatedContent = "
+<!--START_SECTION:README-->
+### 📂 Projets récents
 
-    file_put_contents('README.md', $updatedReadme);
+| Nom du Projet       | Lien GitHub                                        |
+|---------------------|----------------------------------------------------|
+$recentProjects
+
+---
+
+<div style=\"color: #00ff00; font-family: 'Courier New', monospace; background-color: black; padding: 10px; border-radius: 5px;\">
+  <p>System Status: <strong>Online</strong></p>
+  <p>Last Update: <strong>" . date('Y-m-d H:i:s') . "</strong></p>
+</div>
+<!--END_SECTION:README-->
+";
+
+    $readmeTemplate = preg_replace('/<!--START_SECTION:README-->.*<!--END_SECTION:README-->/s', $updatedContent, $readmeTemplate);
+    file_put_contents('README.md', $readmeTemplate);
 }
 
 fetchGitHubData($username);
-
