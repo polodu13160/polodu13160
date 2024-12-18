@@ -32,3 +32,4 @@ jobs:
         git add README.md
         git commit -m "Update README dynamically"
         git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git HEAD:main
+      continue-on-error: true
