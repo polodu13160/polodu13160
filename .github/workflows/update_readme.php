@@ -8,41 +8,22 @@ $readmeTemplate = file_get_contents('README.md');
 
 function fetchGitHubData($username) {
     $client = new Client();
-    $oneWeekAgo = new DateTime('-1 week');
-    $firstOfMonth = new DateTime('first day of this month');
-    $today = new DateTime();
+    $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
+    $firstOfMonth = date('Y-m-d', strtotime('first day of this month'));
 
     // Echo the dates for debugging purposes
-    echo "Date one week ago: " . $oneWeekAgo->format('Y-m-d') . "\n";
-    echo "Date first of month: " . $firstOfMonth->format('Y-m-d') . "\n";
+    echo "Date one week ago: $oneWeekAgo\n";
+    echo "Date first of month: $firstOfMonth\n";
 
-    $commitsWeekCount = 0;
-    $commitsMonthCount = 0;
+    $commitsWeekResponse = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:>$oneWeekAgo", [
+        'headers' => ['Accept' => 'application/vnd.github.v3+json'],
+    ]);
+    $commitsWeek = json_decode($commitsWeekResponse->getBody(), true);
 
-    // Loop for the week
-    $interval = new DateInterval('P1D');
-    $period = new DatePeriod($oneWeekAgo, $interval, $today->add(new DateInterval('P1D')));
-
-    foreach ($period as $date) {
-        $dateString = $date->format('Y-m-d');
-        $response = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:$dateString", [
-            'headers' => ['Accept' => 'application/vnd.github.v3+json'],
-        ]);
-        $data = json_decode($response->getBody(), true);
-        $commitsWeekCount += $data['total_count'];
-    }
-
-    // Loop for the month
-    $period = new DatePeriod($firstOfMonth, $interval, $today);
-
-    foreach ($period as $date) {
-        $dateString = $date->format('Y-m-d');
-        $response = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:$dateString", [
-            'headers' => ['Accept' => 'application/vnd.github.v3+json'],
-        ]);
-        $data = json_decode($response->getBody(), true);
-        $commitsMonthCount += $data['total_count'];
-    }
+    $commitsMonthResponse = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:>$firstOfMonth", [
+        'headers' => ['Accept' => 'application/vnd.github.v3+json'],
+    ]);
+    $commitsMonth = json_decode($commitsMonthResponse->getBody(), true);
 
     $reposResponse = $client->get("https://api.github.com/users/$username/repos?sort=created&per_page=3");
     $repos = json_decode($reposResponse->getBody(), true);
@@ -60,8 +41,8 @@ function fetchGitHubData($username) {
         '{{ github_username }}',
         '{{ last_update }}'
     ], [
-        $commitsWeekCount,
-        $commitsMonthCount,
+        $commitsWeek['total_count'],
+        $commitsMonth['total_count'],
         $recentProjects,
         $username,
         date('Y-m-d H:i:s')
@@ -71,3 +52,4 @@ function fetchGitHubData($username) {
 }
 
 fetchGitHubData($username);
+
