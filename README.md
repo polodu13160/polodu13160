@@ -7,8 +7,8 @@
 
 ### 📈 Stats d'activité
 
-- **Commits cette semaine** : `🟢 {{ commits_week }}`
-- **Commits ce mois-ci** : `🟢 {{ commits_month }}`
+- **Commits cette semaine** : `🟢 0`
+- **Commits ce mois-ci** : `🟢 0`
 
 ---
 
@@ -16,7 +16,10 @@
 
 | Nom du Projet       | Lien GitHub                                        |
 |---------------------|----------------------------------------------------|
-{{ recent_projects }}
+| 🟢 **polodu13160** | [Accéder au repo](https://github.com/polodu13160/polodu13160) |
+| 🟢 **BornToBeRoot-42-Rocky-2024** | [Accéder au repo](https://github.com/polodu13160/BornToBeRoot-42-Rocky-2024) |
+| 🟢 **Command-creator-by-an-executable** | [Accéder au repo](https://github.com/polodu13160/Command-creator-by-an-executable) |
+
 
 ---
 
@@ -28,5 +31,5 @@
 
 <div style="color: #00ff00; font-family: 'Courier New', monospace; background-color: black; padding: 10px; border-radius: 5px;">
   <p>System Status: <strong>Online</strong></p>
-  <p>Last Update: <strong>{{ last_update }}</strong></p>
+  <p>Last Update: <strong>2024-12-18 01:50:08</strong></p>
 </div>
