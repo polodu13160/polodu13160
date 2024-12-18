@@ -21,7 +21,7 @@ jobs:
       run: composer require guzzlehttp/guzzle
 
     - name: Fetch GitHub Data and Update README
-      run: php update_readme.php
+      run: php ./github/workflows/update_readme.php
 
     - name: Commit and Push Changes
       run: |
