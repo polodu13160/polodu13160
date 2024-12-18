@@ -25,7 +25,7 @@
 
 ### 👀 Nombre de visiteurs
 
-![Visiteurs](https://img.shields.io/badge/dynamic/json?color=green&label=visitors&query=value&url=https%3A%2F%2Fapi.countapi.xyz%2Fget%2Fpolodu13160.polodu13160%2Fvisitors)
+![Profile Views](http://img.shields.io/badge/Profile%20Views-58-blue)
 
 ---
 
