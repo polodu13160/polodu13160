@@ -25,7 +25,7 @@
 
 ### 👀 Nombre de visiteurs
 
-![Profile Views](http://img.shields.io/badge/Profile%20Views-58-blue)
+![Profile views](https://komarev.com/ghpvc/?username=polodu13160)
 
 ---
 
