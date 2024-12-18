@@ -8,8 +8,8 @@ $readmeTemplate = file_get_contents('README.md');
 
 function fetchGitHubData($username) {
     $client = new Client();
-    $oneWeekAgo = date('c', strtotime('-1 week'));
-    $firstOfMonth = date('c', strtotime('first day of this month'));
+    $oneWeekAgo = date('Y-m-d', strtotime('-1 week'));
+    $firstOfMonth = date('Y-m-d', strtotime('first day of this month'));
 
     $commitsWeekResponse = $client->get("https://api.github.com/search/commits?q=author:$username+committer-date:>$oneWeekAgo", [
         'headers' => ['Accept' => 'application/vnd.github.v3+json'],
