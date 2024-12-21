@@ -14,8 +14,8 @@ function fetchGitHubData($username) {
     $recentProjects = '';
     $index = 0;
     foreach ($repos as $repo) {
-        if (index == 0)
-            index = 1;
+        if ($index == 0)
+            $index = 1;
         else $recentProjects .= "| 🟢 **{$repo['name']}** | [Accéder au repo]({$repo['html_url']}) |\n";
     }
 
