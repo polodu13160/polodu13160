@@ -8,12 +8,15 @@ $readmeTemplate = file_get_contents('README.md');
 
 function fetchGitHubData($username) {
     $client = new Client();
-    $reposResponse = $client->get("https://api.github.com/users/$username/repos?sort=created&per_page=3");
+    $reposResponse = $client->get("https://api.github.com/users/$username/repos?sort=created&per_page=4");
     $repos = json_decode($reposResponse->getBody(), true);
 
     $recentProjects = '';
+    $index = 0;
     foreach ($repos as $repo) {
-        $recentProjects .= "| 🟢 **{$repo['name']}** | [Accéder au repo]({$repo['html_url']}) |\n";
+        if (index == 0)
+            index = 1;
+        else $recentProjects .= "| 🟢 **{$repo['name']}** | [Accéder au repo]({$repo['html_url']}) |\n";
     }
 
     global $readmeTemplate;
