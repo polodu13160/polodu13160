@@ -8,17 +8,17 @@
 ### 📈 Stats d'activité
 
 <!--START_SECTION:waka-->
-![Profile Views](http://img.shields.io/badge/Profile%20Views-82-blue)
+![Profile Views](http://img.shields.io/badge/Profile%20Views-372-blue)
 
-![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-761.9%20thousand%20lines%20of%20code-blue)
+![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-762.0%20thousand%20lines%20of%20code-blue)
 
 **I'm an Early 🐤** 
 
 ```text
-🌞 Morning                313 commits         ██████░░░░░░░░░░░░░░░░░░░   25.30 % 
-🌆 Daytime                750 commits         ███████████████░░░░░░░░░░   60.63 % 
-🌃 Evening                115 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   09.30 % 
-🌙 Night                  59 commits          █░░░░░░░░░░░░░░░░░░░░░░░░   04.77 % 
+🌞 Morning                314 commits         ██████░░░░░░░░░░░░░░░░░░░   25.22 % 
+🌆 Daytime                751 commits         ███████████████░░░░░░░░░░   60.32 % 
+🌃 Evening                118 commits         ██░░░░░░░░░░░░░░░░░░░░░░░   09.48 % 
+🌙 Night                  62 commits          █░░░░░░░░░░░░░░░░░░░░░░░░   04.98 % 
 ```
 
 
