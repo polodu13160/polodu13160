@@ -34,23 +34,25 @@
 
 
 
+
 <!--START_SECTION:README-->
 ### 📂 Projets récents
 
 | Nom du Projet       | Lien GitHub                                        |
 |---------------------|----------------------------------------------------|
+| 🟢 **philosophers** | [Accéder au repo](https://github.com/polodu13160/philosophers) |
+| 🟢 **minishell** | [Accéder au repo](https://github.com/polodu13160/minishell) |
 | 🟢 **pipex** | [Accéder au repo](https://github.com/polodu13160/pipex) |
-| 🟢 **fdf** | [Accéder au repo](https://github.com/polodu13160/fdf) |
-| 🟢 **libft_updated** | [Accéder au repo](https://github.com/polodu13160/libft_updated) |
 
 
 ---
 
 <div style="color: #00ff00; font-family: 'Courier New', monospace; background-color: black; padding: 10px; border-radius: 5px;">
   <p>System Status: <strong>Online</strong></p>
-  <p>Last Update: <strong>2025-05-31 14:14:09</strong></p>
+  <p>Last Update: <strong>2025-10-05 16:08:29</strong></p>
 </div>
 <!--END_SECTION:README-->
+
 
 
 
